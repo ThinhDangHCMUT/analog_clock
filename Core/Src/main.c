@@ -211,26 +211,16 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 
   clearAllClock();
-  int sec = 0;
-  int min = 5;
-  int hour = 12;
+  int count = 0;
   while (1)
   {
-	 if(sec == 60){
-		 sec = 0;
-		 min++;
-	 }
-	 if(min == 60){
-		 min = 0;
-		 hour++;
-	 }
-	 if(hour == 12){
-		 hour = 0;
-	 }
-	 setClock(sec, min, hour);
-
-	 HAL_Delay(10);
-	 sec++;
+		 HAL_Delay(1000);
+		  setNumberOnClock(count);
+		  if(count == 12){
+			  clearAllClock();
+			  count = -1;
+		  }
+		  count++;
   }
   /* USER CODE END 3 */
 }
