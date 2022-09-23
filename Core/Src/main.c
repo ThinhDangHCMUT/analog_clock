@@ -206,17 +206,14 @@ int main(void)
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
 
-
   /* USER CODE END 2 */
-  clearAllClock();
- // int count = 0;
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
+  clearAllClock();
   int sec = 0;
   int min = 5;
   int hour = 12;
-
-
   while (1)
   {
 	 if(sec == 60){
