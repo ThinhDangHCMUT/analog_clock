@@ -148,28 +148,12 @@ void setNumberOnClock(int num){
 	  	  }
   }
 
-void clockSystem(int hour, int min, int sec){
-	min = min/5;
-	sec = sec/5;
-	if(sec == 0 || min == 0 || hour == 0 || hour == 12) HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, RESET);
-	if(sec == 1 || min == 1 || hour == 1 || hour == 13) HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, RESET);
-	if(sec == 2 || min == 2 || hour == 2 || hour == 14) HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, RESET);
-	if(sec == 3 || min == 3 || hour == 3 || hour == 15) HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, RESET);
-	if(sec == 4 || min == 4 || hour == 4 || hour == 16) HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, RESET);
-	if(sec == 5 || min == 5 || hour == 5 || hour == 17) HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, RESET);
-	if(sec == 6 || min == 6 || hour == 6 || hour == 18) HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, RESET);
-	if(sec == 7 || min == 7 || hour == 7 || hour == 19) HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, RESET);
-	if(sec == 8 || min == 8 || hour == 8 || hour == 20) HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, RESET);
-	if(sec == 9 || min == 9 || hour == 9 || hour == 21) HAL_GPIO_WritePin(GPIOA, GPIO_PIN_13, RESET);
-	if(sec == 10 || min == 10 || hour == 10 || hour == 22) HAL_GPIO_WritePin(GPIOA, GPIO_PIN_14, RESET);
-	if(sec == 11 || min == 11 || hour == 11 || hour == 23) HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, RESET);
-}
 
 void setClock(int sec, int min, int hour){
 	clearAllClock();
-	 setNumberOnClock(sec/5);
-	 setNumberOnClock(min/5);
-	 setNumberOnClock(hour);
+	setNumberOnClock(sec/5);
+	setNumberOnClock(min/5);
+	setNumberOnClock(hour);
 }
 
 
@@ -211,25 +195,26 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 
   clearAllClock();
+  //Give any time. Here my start time is 12h5m0s
   int sec = 0;
   int min = 5;
   int hour = 12;
   while (1)
   {
-	 if(sec == 60){
+	 if(sec == 60){  //if seconds equals 60 then 1 minute
 		 sec = 0;
 		 min++;
 	 }
-	 if(min == 60){
+	 if(min == 60){	//if minutes equals 60 then 1 hour
 		 min = 0;
 		 hour++;
 	 }
-	 if(hour == 12){
+	 if(hour == 12){ //if the hour signal is at 12 is equivalent to 0 hour
 		 hour = 0;
 	 }
-	 setClock(sec, min, hour);
+	 setClock(sec, min, hour); // show 3 led signals for hour, minute and second information
 
-	 HAL_Delay(10);
+	 HAL_Delay(10);  //I set delay time to 10ms to saving time simulation
 	 sec++;
   }
   /* USER CODE END 3 */
